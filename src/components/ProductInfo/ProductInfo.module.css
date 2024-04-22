@@ -4,3 +4,50 @@
   flex-direction: column;
   align-items: center; 
 }
+
+.horizontal-line {
+  border-top: 1px solid #f0f0f2;
+  margin: 10px 0;
+  width: 100%;
+}
+
+.section{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  margin-right: 20px;
+  align-items: center;
+}
+
+.product-info img{
+  width: 50%;
+  margin-top: 20px;
+}
+
+.title {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 0;
+}
+
+.subtitle {
+  font-size: small;
+  color: #36313164;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+
+.tag {
+  display: inline-block;
+  border: 1px solid #f0f0f0;
+  background-color: #fff;
+  color: #534848;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-size: 14px;
+}

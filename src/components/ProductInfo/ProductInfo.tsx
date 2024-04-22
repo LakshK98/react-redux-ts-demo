@@ -7,7 +7,21 @@ const ProductInfo: React.FC = () => {
 
   return (
     <div className={styles['product-info']}>
-      <p>{product.title}</p>
+    <div className={styles['section']}>
+      <img src={product.image} />
+      <p className={styles['title']}>{product.title}</p>
+      <p className={styles['subtitle']}>{product.subtitle}</p>
+    </div>
+    <div className={styles['horizontal-line']}></div>
+
+    <div className={styles['section']}>
+      <div >
+        {product.tags.map((tag, index) => (
+          <span key={index} className={styles['tag']}>{tag}</span>
+        ))}
+      </div>
+    </div>
+    <div className={styles['horizontal-line']}></div>
     </div>
   );
 };
