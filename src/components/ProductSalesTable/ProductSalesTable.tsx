@@ -19,22 +19,46 @@ const formatDate = (dateString: string): string => {
 
 
 const ProductSalesTable: React.FC = () => {
+  const [sortBy, setSortBy] = useState<string>('weekEnding');
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const sales = useAppSelector(state => state.product.product.sales);
+
+  const handleSort = (column: string) => {
+    console.log("touchde" )
+    console.log(column )
+    if (sortBy === column) {
+      setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortBy(column);
+      setSortOrder('asc');
+    }
+  };
+
+  const sortedSales = [...sales].sort((a, b) => {
+    const aValue = sortBy === 'weekEnding' ? new Date(a[sortBy]) : (a as any)[sortBy];
+    const bValue = sortBy === 'weekEnding' ? new Date(b[sortBy]) : (b as any)[sortBy];
+
+    if (sortOrder === 'asc') {
+      return aValue - bValue;
+    } else {
+      return bValue - aValue;
+    }
+  });
 
   return (
     <div className={styles['sales-table']}>
       <table>
         <thead>
           <tr>
-            <th >Week Ending </th>
-            <th >Retail Sales </th>
-            <th >Wholesale Sales </th>
-            <th >Units Sold </th>
-            <th >Retailer Margin </th>
+            <th onClick={() => handleSort('weekEnding')}>Week Ending {sortBy === 'weekEnding' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+            <th onClick={() => handleSort('retailSales')} >Retail Sales {sortBy === 'retailSales' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+            <th onClick={() => handleSort('wholesaleSales')}>Wholesale Sales {sortBy === 'wholesaleSales' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+            <th onClick={() => handleSort('unitsSold')}>Units Sold {sortBy === 'unitsSold' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
+            <th onClick={() => handleSort('retailerMargin')}>Retailer Margin {sortBy === 'retailerMargin' && (sortOrder === 'asc' ? '↑' : '↓')}</th>
           </tr>
         </thead>
       <tbody>
-        {sales.map((entry, index) => (
+        {sortedSales.map((entry, index) => (
           <tr key={index}>
             <td>{formatDate(entry.weekEnding)}</td>
             <td>{formatCurrency(entry.retailSales)}</td>

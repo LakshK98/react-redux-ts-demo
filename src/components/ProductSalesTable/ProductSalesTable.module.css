@@ -9,6 +9,7 @@ table {
 th {
   font-weight: 600;
   padding: 20px;
+  cursor: default;
 }
 
 td {
